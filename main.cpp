@@ -5,8 +5,30 @@
 #include "ofxCrazyradio.h"
 #include <stdio.h>
 #include <unistd.h>
-#include "Utils.h"
 #include <math.h>
+#ifdef __APPLE__
+#include <mach/mach_time.h>
+uint64_t ReadTicks( void )
+{
+    return mach_absolute_time();
+}
+double  TicksToSeconds( uint64_t delta )
+{
+    static long double conversion = 0.0L;
+    if( 0.0L == conversion )
+    {
+        // attempt to get conversion to nanoseconds
+        mach_timebase_info_data_t info;
+        int err = mach_timebase_info( &info );
+        if( err )
+            return __builtin_nanf("");
+        conversion = info.numer / (1e9L * info.denom);
+    }
+
+    return (double) (delta * conversion);
+}
+#else
+#endif
 
 int main(int argc, char* argv[])
 {
