@@ -28,6 +28,19 @@ double  TicksToSeconds( uint64_t delta )
     return (double) (delta * conversion);
 }
 #else
+#include <sys/time.h>
+
+uint64_t ReadTicks( void )
+{
+	timespec ts;
+	clock_gettime(CLOCK_REALTIME,&ts);
+
+	return 1000000000*ts.tv_sec + ts.tv_nsec;
+}
+double  TicksToSeconds( uint64_t delta )
+{
+return delta/1e9;
+}
 #endif
 
 int main(int argc, char* argv[])

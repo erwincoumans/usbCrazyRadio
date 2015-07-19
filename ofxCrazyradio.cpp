@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "ofxCrazyradio.h"
-
+#include <string.h>
 
 ofxCrazyradio::ofxCrazyradio()
     : ctx_(NULL),
