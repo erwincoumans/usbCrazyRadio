@@ -8,17 +8,17 @@ Uses code from ofxCrazyFlie, see https://github.com/Saqoosha/ofxCrazyflie
 
 == Build ==
 
-Install libusb-1.0, for example brew install libusb-compat 
-
 Mac OSX:
 ```
 If libusb-1.0 is not installed, use brew install libusb-compat and then
+
 ./build_mac.sh
 ```
 Linux:
 
 ```
 If libusb-1.0 is not installed, use sudo apt-get install libusb-1.0 and then
+
 ./build_linux.sh
 ```
 == Run ==
@@ -27,7 +27,10 @@ Make sure the receiver nRF24L01+ is running some ping-pong script with acknowled
 ```
 ./usbCrazyRadio
 ```
-or on Linux
+or on Linux (libusb access seems to require privilege)
+```
+sudo ./usbCrazyRadio
+```
 
 == Example output ==
 ```
