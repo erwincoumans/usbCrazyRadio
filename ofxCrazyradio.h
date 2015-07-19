@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "/usr/local/include/libusb-1.0/libusb.h"
+#include "libusb-1.0/libusb.h"
 #include "ofxCRTPPacket.h"
 
 
