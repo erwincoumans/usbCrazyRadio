@@ -154,20 +154,29 @@ int ofxCrazyradio::ScanChannels(uint16_t start, uint16_t stop, uint8_t *channels
   return GetVendorSetup(SCANN_CHANNELS, 0, 0, channels, length);
 }
 
+#ifdef __APPLE__
+#define USE_INTERRUPT
+#endif
 
 ofxCrazyradio::Ack *ofxCrazyradio::SendPacket(uint8_t *data_out, uint8_t length) {
 //  std::cout << (int)data_out[0] << std::endl;
   int transfered = 0;
-//  int ret = libusb_bulk_transfer(handle_, 1 | LIBUSB_ENDPOINT_OUT, data_out, length, &transfered, 1000);
+#ifdef USE_INTERRUPT
   int ret = libusb_interrupt_transfer(handle_, 1 | LIBUSB_ENDPOINT_OUT, data_out, length, &transfered, 1000);
+#else
+  int ret = libusb_bulk_transfer(handle_, 1 | LIBUSB_ENDPOINT_OUT, data_out, length, &transfered, 1000);
+#endif
   if (ret || transfered < length)
     std::cerr << "send: " << libusb_error_name(ret) << ", " << (int)length << ", " << transfered << std::endl;
 
   Ack *ack = NULL;
   uint8_t data_in[64];
   transfered = 0;
-//  ret = libusb_bulk_transfer(handle_, 1 | LIBUSB_ENDPOINT_IN, data_in, 64, &transfered, 1000);
-  ret = libusb_interrupt_transfer(handle_, 1 | LIBUSB_ENDPOINT_IN, data_in, 64, &transfered, 1000);
+#ifdef USE_INTERRUPT
+ ret = libusb_interrupt_transfer(handle_, 1 | LIBUSB_ENDPOINT_IN, data_in, 64, &transfered, 1000);
+#else
+  ret = libusb_bulk_transfer(handle_, 1 | LIBUSB_ENDPOINT_IN, data_in, 64, &transfered, 1000);
+#endif 
   if (ret)
     std::cerr << "receive: " << libusb_error_name(ret) << ", " << transfered << std::endl;
   if (ret == 0 && transfered > 0) {
