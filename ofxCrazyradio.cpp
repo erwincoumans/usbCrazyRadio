@@ -78,8 +78,8 @@ bool ofxCrazyradio::init() {
       SetChannel(76);//0x4c);
       arc_ = -1;
       SetContCarrier(false);
-      //uint8_t address[] = "\xe7\xe7\xe7\xe7\xe7";
-      uint8_t address[] = "\xE8\xE8\xF0\xF0\xE1";
+      uint8_t address[] = "\xe7\xe7\xe7\xe7\xe7";
+      //uint8_t address[] = "\xE8\xE8\xF0\xF0\xE1";
 
       SetAddress(address);
       SetPower(P_0DBM);
