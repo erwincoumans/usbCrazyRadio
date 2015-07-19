@@ -2,19 +2,23 @@
 
 Send and receive to nRF24L01+ from Mac and Linux using libusb and the CrazyRadio dongle with nRF24LU1+
 Tested with an Arduino with nRF24L01+ transceiver and the ping-pong sketch (in arduino/crazyradio_pingping_with_ack.ino)
+Get the dongle here: http://www.seeedstudio.com/depot/Crazyradio-PA-long-range-24Ghz-USB-radio-dongle-with-antenna-p-2104.html
 
 Uses code from ofxCrazyFlie, see https://github.com/Saqoosha/ofxCrazyflie
 
 == Build ==
 
-Install libusb-1.0
+Install libusb-1.0, for example brew install libusb-compat 
 
 Mac OSX:
 ```
+If libusb-1.0 is not installed, use brew install libusb-compat and then
 ./build_mac.sh
 ```
 Linux:
+
 ```
+If libusb-1.0 is not installed, use sudo apt-get install libusb-1.0 and then
 ./build_linux.sh
 ```
 == Run ==
@@ -23,6 +27,8 @@ Make sure the receiver nRF24L01+ is running some ping-pong script with acknowled
 ```
 ./usbCrazyRadio
 ```
+or on Linux
+
 == Example output ==
 ```
 [~/develop/network/crazyradio2nrf24l01/tmp/usbCrazyRadio]$ ./usbCrazyRadio 
