@@ -43,7 +43,7 @@ uint64_t  TicksToNanoSeconds( uint64_t delta )
         return (delta * conversion);
 }
 #else
-#include <sys/time.h>
+#include <time.h>
 
 uint64_t ReadClockTicks( void )
 {
@@ -52,7 +52,7 @@ uint64_t ReadClockTicks( void )
 
         return 1000000000*ts.tv_sec + ts.tv_nsec;
 }
-uint64_t TimeToNanoSeconds( uint64_t ticks)
+uint64_t TicksToNanoSeconds( uint64_t ticks)
 {
 	return ticks;
 }
